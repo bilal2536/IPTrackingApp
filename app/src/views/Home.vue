@@ -24,16 +24,35 @@
           ></i>
         </div>
       </div>
+      <InfoIP/>
     </div>
+     <div id="mapid" class="h-full z-10"></div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 
-
+import InfoIP from "../components/InfoIP.vue";
+import leaflet from "leaflet";
+import {onMounted} from "vue";
 export default {
   name: 'Home',
-  components: {}
+  components: {  InfoIP },
+  setup() {
+    let mymap;
+    onMounted(() => {
+      mymap = leaflet.map('mapid').setView([47.383, 0.683], 13);
+
+      leaflet.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYmlsYWxqZWxsb3VsaTI1IiwiYSI6ImNrenBmbWtqczAxMHkyd3BnNGhyejFmdTUifQ.r7G8czy0kFB_VuBqgMy_9A', {
+          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+          maxZoom: 18,
+          id: 'mapbox/streets-v11',
+          tileSize: 512,
+          zoomOffset: -1,
+          accessToken: 'pk.eyJ1IjoiYmlsYWxqZWxsb3VsaTI1IiwiYSI6ImNrenBmbWtqczAxMHkyd3BnNGhyejFmdTUifQ.r7G8czy0kFB_VuBqgMy_9A'
+      }).addTo(mymap);
+    })
+  },
 }
 </script>
