@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col h-screen max-h-screen">
-    <div class="z-20 flex justify-center relative bg-black bg-hero-pattern bg-cover px-4 pt-8 pb-32">
+    <div class="z-20 flex justify-center relative bg-regal-blue  px-4 pt-8 pb-32">
       <div class="w-full max-w-screen-sm">
         <h1 class="text-white text-center text-3xl pb-4">IP Address Tracker</h1>
         <div class="flex">
@@ -13,14 +13,17 @@
           <i
             @click="getIpInfo"
             class="cursor-pointer
-          bg-black
+          bg-teal-500
           text-white
           px-4
           rounded-tr-md
           rounded-br-md
           flex
           items-center
-          fas fa-chevron-right"
+          fas fa-chevron-right
+          border-white
+          border-2"
+          
           ></i>
         </div>
       </div>
