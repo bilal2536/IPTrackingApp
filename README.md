@@ -1,6 +1,6 @@
 # IPTrackingApp
 
-L'intégration d'une maquette en respectant le responsive design. L'objectif étant d'appliquer les bonnes pratiques d'intégration avec la découverte de TailwindCSS. 
+Création d'une application de géolocalisation par adresse IP en utilisant vue 3, tailwind css et leaflet.js. 
 
 ## Travail effectué 
 
@@ -8,6 +8,7 @@ L'intégration d'une maquette en respectant le responsive design. L'objectif ét
 - Utilisation de la bibliothèque Javascript Leaflet ==> https://leafletjs.com
 - Utilisation d'une API de géolocalisation ==> Lien : https://geo.ipify.org
 - Integration de l'interface en HTML et TailwindCSS
+- Recherches Docs (Vue, Leaflet, VScode)...
 
 ## Conclusion exercice 
 
