@@ -27,7 +27,7 @@
           ></i>
         </div>
       </div>
-      <InfoIP/>
+      <InfoIP v-if="ipInfo" v-bind:ipInfo="ipInfo"/>
     </div>
      <div id="mapid" class="h-full z-10"></div>
   </div>
@@ -38,12 +38,15 @@
 
 import InfoIP from "../components/InfoIP.vue";
 import leaflet from "leaflet";
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
+import axios from "axios";
 export default {
   name: 'Home',
   components: {  InfoIP },
   setup() {
     let mymap;
+    const queryIp = ref("")
+    const ipInfo = ref(null)
     onMounted(() => {
       mymap = leaflet.map('mapid').setView([47.383, 0.683], 13);
 
@@ -56,6 +59,28 @@ export default {
           accessToken: 'pk.eyJ1IjoiYmlsYWxqZWxsb3VsaTI1IiwiYSI6ImNrenBmbWtqczAxMHkyd3BnNGhyejFmdTUifQ.r7G8czy0kFB_VuBqgMy_9A'
       }).addTo(mymap);
     })
+        // gets ip information from API
+    const getIpInfo = async () => {
+      try {
+        const data = await axios.get(
+          `https://geo.ipify.org/api/v1?apiKey=at_n5sr02FyAr5xVVVbJ1UuImHHyJyaQ&ipAddress=${queryIp.value}`
+        );
+        const result = data.data;
+        ipInfo.value = {
+          address: result.ip,
+          state: result.location.region,
+          timezone: result.location.timezone,
+          isp: result.isp,
+          lat: result.location.lat,
+          lng: result.location.lng,
+        };
+        leaflet.marker([ipInfo.value.lat, ipInfo.value.lng]).addTo(mymap);
+        mymap.setView([ipInfo.value.lat, ipInfo.value.lng], 13);
+      } catch (err) {
+        alert(err.message);
+      }
+    };
+    return {queryIp, ipInfo, getIpInfo};
   },
 }
 </script>
